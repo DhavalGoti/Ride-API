@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="dhaval" id="1001122001_create_tables">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_person"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="registration_number" type="VARCHAR(255)"/>
+        </createTable>
+        <createTable tableName="ride">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_ride"/>
+            </column>
+            <column name="driver_id" type="BIGINT"/>
+            <column name="rider_id" type="BIGINT"/>
+            <column name="start_time" type="VARCHAR(255)"/>
+            <column name="end_time" type="VARCHAR(255)"/>
+            <column name="distance" type="BIGINT"/>
+        </createTable>
+         <addForeignKeyConstraint baseColumnNames="driver_id"
+            baseTableName="ride"
+            constraintName="fk_address_person_driver"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="id"
+            referencedTableName="person"/>
+          <addForeignKeyConstraint baseColumnNames="rider_id"
+            baseTableName="ride"
+            constraintName="fk_address_person_rider"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="id"
+            referencedTableName="person"/>
+    </changeSet>
+</databaseChangeLog>
